@@ -2,8 +2,8 @@
 .terraform/
 *.tfstate
 *.tfstate.*
-.terraform.lock.hcl
 terraform.tfvars
+# (commit .terraform.lock.hcl — it pins provider versions for everyone)
 
 # Keys / secrets — never commit these
 *.pem
