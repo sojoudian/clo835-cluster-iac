@@ -7,7 +7,7 @@ kubectl get nodes -o wide
 
 # ---- Generate a Pod manifest from the CLI (deck: kubia-manual) ----
 # --dry-run=client creates nothing — it just renders the YAML into the file.
-kubectl run kubia --image=YOUR_DOCKERHUB_USERNAME/kubia:0.1 --dry-run=client -o yaml > kubia-manual.yaml
+kubectl run kubia --image=maziar/kubia:0.1 --dry-run=client -o yaml > kubia-manual.yaml
 kubectl apply -f kubia-manual.yaml                  # now create the pod from the manifest
 kubectl get pod kubia
 

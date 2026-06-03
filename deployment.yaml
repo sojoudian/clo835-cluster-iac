@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: kubia
-          image: YOUR_DOCKERHUB_USERNAME/kubia:0.1
+          image: maziar/kubia:0.1
           ports:
             - containerPort: 8080
           resources:

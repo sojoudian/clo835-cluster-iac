@@ -67,7 +67,7 @@ kubectl get nodes -o wide          # masternode + workernode1 + workernode2, all
 
 `commands.sh` holds the in-class commands (Pods, manifests, sidecars, labels, namespaces, ReplicaSets, lifecycle). Run them one at a time on the master.
 
-> The lab manifests reference `YOUR_DOCKERHUB_USERNAME/kubia:0.1`. Replace that with your own image (see the separate `kubia` app repo), or use `luksa/kubia` for a quick test.
+> The lab manifests reference `maziar/kubia:0.1`. Replace that with your own image (see the separate `kubia` app repo), or use `luksa/kubia` for a quick test.
 
 ## Cleanup
 
