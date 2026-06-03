@@ -4,10 +4,18 @@ Infrastructure-as-code that builds a **3-node Kubernetes cluster** (1 control pl
 
 The cluster forms itself: each node installs the prerequisites at boot, the master runs `kubeadm init`, the workers join automatically, and Flannel CNI is applied. No manual init/join needed.
 
+## Install the tools
+
+| Tool | Install guide |
+|------|---------------|
+| AWS CLI v2 | https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html |
+| Terraform | https://developer.hashicorp.com/terraform/install |
+| kubectl | https://kubernetes.io/docs/tasks/tools/ |
+| Git | https://git-scm.com/downloads |
+
 ## Prerequisites
 
 - AWS Academy Learner Lab access
-- `terraform`, `kubectl`, and `git` installed locally
 - An EC2 **key pair** in the Learner Lab (for SSH)
 
 ## 1. Get your AWS credentials
