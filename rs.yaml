@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata: { name: web-rs }
+spec:
+  replicas: 3
+  selector: { matchLabels: { app: web-rs } }
+  template:
+    metadata: { labels: { app: web-rs } }
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+          ports: [{ containerPort: 80 }]

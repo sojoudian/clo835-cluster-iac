@@ -1,0 +1,4 @@
+# Copy this file to terraform.tfvars and set your own values.
+#   cp terraform.tfvars.example terraform.tfvars
+
+key_name = "your-keypair-name"
