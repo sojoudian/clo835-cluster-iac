@@ -4,15 +4,10 @@ metadata:
   name: web-sidecar
   labels: { app: web, tier: frontend }
 spec:
-  volumes:
-    - name: html
-      emptyDir: {}
   containers:
-    - name: web
-      image: nginx
-      ports: [{ containerPort: 80 }]
-      volumeMounts: [{ name: html, mountPath: /usr/share/nginx/html }]
-    - name: content
+    - name: web                 # main container (serves on :8080)
+      image: maziar/kubia:0.1
+      ports: [{ containerPort: 8080 }]
+    - name: sidecar             # sidecar
       image: busybox
-      command: ["/bin/sh","-c","echo \"<h1>Hello from the sidecar at $(date)</h1>\" > /usr/share/nginx/html/index.html; sleep 3600"]
-      volumeMounts: [{ name: html, mountPath: /usr/share/nginx/html }]
+      command: ["/bin/sh", "-c", "sleep 3600"]

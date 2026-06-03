@@ -8,6 +8,6 @@ spec:
     metadata: { labels: { app: web-rs } }
     spec:
       containers:
-        - name: nginx
-          image: nginx
-          ports: [{ containerPort: 80 }]
+        - name: kubia
+          image: maziar/kubia:0.1
+          ports: [{ containerPort: 8080 }]

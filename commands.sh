@@ -19,22 +19,17 @@ metadata:
   name: web-sidecar
   labels: { app: web, tier: frontend }
 spec:
-  volumes:
-    - name: html
-      emptyDir: {}
   containers:
-    - name: web                 # main container
-      image: nginx
-      ports: [{ containerPort: 80 }]
-      volumeMounts: [{ name: html, mountPath: /usr/share/nginx/html }]
-    - name: content             # sidecar
+    - name: web                 # main container (serves on :8080)
+      image: maziar/kubia:0.1
+      ports: [{ containerPort: 8080 }]
+    - name: sidecar             # sidecar
       image: busybox
-      command: ["/bin/sh","-c","echo \"<h1>Hello from the sidecar at $(date)</h1>\" > /usr/share/nginx/html/index.html; sleep 3600"]
-      volumeMounts: [{ name: html, mountPath: /usr/share/nginx/html }]
+      command: ["/bin/sh","-c","sleep 3600"]
 EOF
 kubectl apply -f pod-sidecar.yaml
 kubectl get pod web-sidecar -o wide                 # 2/2 Running, on a worker node
-kubectl exec web-sidecar -c content -- wget -qO- localhost:80   # shared localhost + shared volume
+kubectl exec web-sidecar -c sidecar -- wget -qO- localhost:8080  # sidecar reaches kubia on shared localhost
 kubectl logs web-sidecar -c web                     # -c picks a container in a multi-container pod
 
 # ---- B. Labels & selectors ----
@@ -56,9 +51,9 @@ spec:
     metadata: { labels: { app: web-rs } }
     spec:
       containers:
-        - name: nginx
-          image: nginx
-          ports: [{ containerPort: 80 }]
+        - name: kubia
+          image: maziar/kubia:0.1
+          ports: [{ containerPort: 8080 }]
 EOF
 kubectl apply -f rs.yaml
 kubectl get pods -l app=web-rs -o wide               # pods SPREAD across worker-1 & worker-2
